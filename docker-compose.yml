@@ -8,5 +8,5 @@ services:
         ports:
             - 5002:80
     
-    # mongo:
-    #     image: 'mongo:4.4.0'
+    mongo:
+        image: 'mongo:4.4.0'
