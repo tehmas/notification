@@ -1,5 +1,5 @@
 from flask_restful import Resource
 
-class User(Resource):
+class UserController(Resource):
     def get(self):
         return ["dummy"]
