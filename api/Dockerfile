@@ -5,4 +5,4 @@ WORKDIR  /usr/src/app
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "run.py"]
+CMD ["python", "-u", "run.py"]
