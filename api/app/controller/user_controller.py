@@ -12,7 +12,7 @@ class UserController(Resource):
     def post(self):
         inputModel = request.get_json()
         
-        (isValid, errorMsg) = validate_user_payload(inputModel)
+        (isValid, errorMsg) = self.validate_user_payload(inputModel)
         if (isValid == False):
             return errorMsg, 400
 
@@ -21,13 +21,13 @@ class UserController(Resource):
             return {'Data':{'id':str(result.inserted_id)}}, 200
         except errors.DuplicateKeyError:
             return {'Error':'Record already exists'}, 500
-
-def validate_user_payload(payload):
-    if ('email' not in payload):
-        return False, {'Error': 'email is required'}
-    if ('firstName' not in payload):
-        return False, {'Error': 'firstName is required'}
-    return True, None
+        
+    def validate_user_payload(self, payload):
+        if ('email' not in payload):
+            return False, {'Error': 'email is required'}
+        if ('firstName' not in payload):
+            return False, {'Error': 'firstName is required'}
+        return True, None
 
 def add_resources(api):
     api.add_resource(UserController, '/user')
