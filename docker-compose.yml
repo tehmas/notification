@@ -3,6 +3,8 @@ version: "3.8"
 services:
     mongo:
         image: "mongo:4.4.0"
+        ports:
+            - "27017:27017"
     
     rabbitmq:
         image: "rabbitmq:3.8.8-management"
