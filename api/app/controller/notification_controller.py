@@ -19,6 +19,8 @@ class NotificationSchema(Schema):
     receivers = fields.List(fields.String(\
         required=True, validate=validate.Length(min=1)),\
             required=True, validate=validate.Length(min=1))
+    language = fields.String(required=True,\
+        validate=validate.Length(min=2,max=5))
 
 class NotificationController(Resource):
     def post(self):
