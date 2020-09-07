@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from app import api, mongo
-from marshmallow import Schema, fields, ValidationError
+from marshmallow import Schema, fields, ValidationError, validate
 import pika
 import os
 from functools import partial
@@ -10,8 +10,15 @@ import json
 class NotificationSchema(Schema):
     title = fields.String(required=True)
     message = fields.String(required=True)
-    providers = fields.List(fields.String(),\
-         required=True)
+    providers = fields.List(fields.String(\
+        required=True,\
+            validate=validate.OneOf(["SMS", "Email", "Mobile"])),\
+                required=True)
+    groupFlag = fields.String(required=True,\
+        validate=validate.OneOf(['Y','N']))
+    receivers = fields.List(fields.String(\
+        required=True, validate=validate.Length(min=1)),\
+            required=True, validate=validate.Length(min=1))
 
 class NotificationController(Resource):
     def post(self):
