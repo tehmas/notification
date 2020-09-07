@@ -25,4 +25,15 @@ services:
             RABBITMQ_AMQP_URL: "amqp://rabbitmq?connection_attempts=5&retry_delay=5"
             MONGO_DB_NAME: "notificationdb"
 
-        
+    worker:
+        build: ./worker
+        volumes:
+            - ./worker:/usr/src/app
+        ports: 
+            - "5003:80"
+        depends_on: 
+            - mongo
+            - rabbitmq
+        environment:
+            RABBITMQ_AMQP_URL: "amqp://rabbitmq?connection_attempts=5&retry_delay=5"
+            MONGO_DB_NAME: "notificationdb"   
