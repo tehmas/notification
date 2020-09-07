@@ -36,4 +36,8 @@ services:
             - rabbitmq
         environment:
             RABBITMQ_AMQP_URL: "amqp://rabbitmq?connection_attempts=5&retry_delay=5"
-            MONGO_DB_NAME: "notificationdb"   
+            MONGO_DB_NAME: "notificationdb"
+            NOTIFICATION_QUEUE: "notification_queue"
+            SMS_QUEUE: "sms_queue"
+            EMAIL_QUEUE: "email_queue"
+            MOBILE_QUEUE: "mobile_queue"  

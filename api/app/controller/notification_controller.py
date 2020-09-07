@@ -5,7 +5,6 @@ from marshmallow import Schema, fields, ValidationError, validate
 import pika
 import os
 from functools import partial
-import json
 
 class NotificationSchema(Schema):
     title = fields.String(required=True)

@@ -27,6 +27,8 @@ class UserController(Resource):
             return False, {'Error': 'email is required'}
         if ('firstName' not in payload):
             return False, {'Error': 'firstName is required'}
+        if ("language" not in payload):
+            return False, {'Error': 'language is required'}
         return True, None
 
 def add_resources(api):
