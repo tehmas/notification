@@ -22,6 +22,11 @@ class UserController(Resource):
         except errors.DuplicateKeyError:
             return {'Error':'Record already exists'}, 500
         
+    def delete(self):
+        mongo.db.user\
+            .remove({'_id':ObjectId(request.args['id'])})
+        return {'Message': 'Sucesss'}, 200
+
     def validate_user_payload(self, payload):
         if ('email' not in payload):
             return False, {'Error': 'email is required'}
