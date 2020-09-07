@@ -38,14 +38,26 @@ def send_provider_requests(users, notificationId, providers, channel):
                 msg, "application/json")  
 
 def send_sms(db, channel, method, header, body):
+    '''
+    Convert body message to preferred language
+    if required
+    '''
     print ('sms sent')
     channel.basic_ack(method.delivery_tag)
 
 def send_email(db, channel, method, header, body):
+    '''
+    Convert body message to preferred language
+    if required
+    '''
     print ('email sent')
     channel.basic_ack(method.delivery_tag)
 
 def push_mobile_notification(db, channel, method, header, body):
+    '''
+    Convert body message to preferred language
+    if required
+    '''
     print ('mobile notification pushed')
     channel.basic_ack(method.delivery_tag)
 
