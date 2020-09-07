@@ -45,19 +45,31 @@ class NotificationController(Resource):
     def on_channel_open(self, notification_id, connection, channel):
         channel.queue_declare(queue='notification_queue',\
             callback=partial(self.on_queue_declared,\
-                channel, connection, notification_id))
+                channel, connection, notification_id),\
+                    durable=True)
 
     def on_queue_declared(self, channel, connection, notification_id, frame):
+        channel.confirm_delivery(partial(\
+            self.on_delivery_confirmation,\
+                 connection))
         channel.basic_publish(exchange='',\
             routing_key='notification_queue',\
                 body=notification_id,
                 properties=pika.BasicProperties(\
                     delivery_mode=2, \
                         content_type= 'text/plain'))
+        
+    def on_delivery_confirmation(self, connection, method_frame):
+        confirmation_type = method_frame.method.NAME.split('.')[1].lower()            
+        if (confirmation_type == 'ack'):
+            print('message published')
+        elif (confirmation_type == 'nack'):
+            print('message not routed')
         connection.close()
         connection.ioloop.stop()
 
 def add_resources(api):
     api.add_resource(NotificationController, '/notification')
+
 
 add_resources(api)
