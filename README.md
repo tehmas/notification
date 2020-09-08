@@ -25,7 +25,7 @@ language | string | Preffered language ISO 639-1 code | Y
 
 Additional optional fields such as `location` can also be sent.
 
-**Sample json:**
+**Sample request:**
 ```json
 {
     "email": "sample@notification.com",
@@ -36,11 +36,25 @@ Additional optional fields such as `location` can also be sent.
 }
 ```
 
-**Errors**
+**Sample response:**
+```json
+{
+    "Data": {
+        "id": "5f572071242533f07f204185"
+    }
+}
+```
+
+**Errors:**
 Status Code | Message | Meaning
 ----------- | ------- | -------
 500 | email is required | "email" has not been sent in the post request body
 500 | firstName is required | "firstName" has not been sent in the post request body
 500 | language is required | "language" has not been sent in the post request body
+500 | Record already exists | A user with the same "email" already exists
 
-
+## User Retrieval
+**Endpoint:** /user
+**Query Parameter:** id - This is the id of the user
+**Request Type:** GET
+**Sample URL:** `/user?id=5f572071242533f07f204185`
