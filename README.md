@@ -10,7 +10,9 @@ Clone this repo and in command-prompt or terminal run:
 
 ## Testing
 `Python 3.8` and `Pytest 6.0.1` is required for testing the `api`. After running the codebase using `docker-compose up`, open up a separate command-prompt or terminal with working directory set to the `test` folder, type and run:
-`pytest -v'. 
+`pytest -v` 
+
+![Test Cases Result](https://github.com/tehmas/notification/blob/master/images/test-cases-result.png)
 
 ## APIs
 
