@@ -98,9 +98,9 @@ Field | Type | Description | Required
 title | string | Title of the notification | Y
 message | string | Actual message of the notification | Y
 providers | array | Types of notifications to be sent. Possible values are "SMS", "Email", "Mobile". Sending at least one of the possible values is required | Y
-groupFlag | string | Possible values are "Y" and "N". "Y" indicates the receivers are group. "N" indicates specific users as receivers.
-receivers | array | If groupFlag is "N", contains the ids of the users. Whereas if groupFlag is "Y", contains the names of groups e.g "location:Pakistan" indicates a group of users who have their location set to "Pakistan".
-language | string | Indicates the original language of the notification and value is according to the ISO 639-1 standard.
+groupFlag | string | Possible values are "Y" and "N". "Y" indicates the receivers are group. "N" indicates specific users as receivers. | Y
+receivers | array | If groupFlag is "N", contains the ids of the users. Whereas if groupFlag is "Y", contains the names of groups e.g "location:Pakistan" indicates a group of users who have their location set to "Pakistan". | Y
+language | string | Indicates the original language of the notification and value is according to the ISO 639-1 standard. | Y
 
 **Sample Request**:
 ```json
