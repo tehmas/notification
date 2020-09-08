@@ -128,7 +128,7 @@ language | string | Indicates the original language of the notification and valu
 - Need to look at the connection restart mechansim incase `rabbitmq` or `mongodb` connection breaks in **notifier.py**.
 
 ## Technology Selection
-- **Mongo DB**: Relational databases are simpler but not expected to be used for such an open-ended scale. A NoSQL database seemed to be perfect for such a large scale.
+- **MongoDB**: Relational databases are simpler but not expected to be used for such an open-ended scale. A NoSQL database seemed to be perfect for such a large scale.
 - **RabbitMQ**: I did not want the API caller/consumer to wait until the notification has actually been sent. Running the actual notification sending code in a separate process made more sense for which I needed a message broker.
 
 ## Avoidance of Exclusive PaaS
