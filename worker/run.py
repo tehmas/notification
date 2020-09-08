@@ -27,7 +27,6 @@ def send_provider_requests(users, notificationId, providers, channel):
     for u in users:
         msg = json.dumps(to_provider_request(u, notificationId))
         if ("SMS" in providers):
-            print ("sending sms request")
             enqueue_message(channel, os.environ["SMS_QUEUE"], \
                 msg, "application/json")
         if ("Email" in providers):
