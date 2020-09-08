@@ -123,7 +123,9 @@ language | string | Indicates the original language of the notification and valu
 - A redis cache layer would prove to be efficient. Currently to avoid passing the actual notification message in the queue, we have to retrieve it again and again from database. After immplementing a redis cache layer, we could simply access the notification from there. Similarly, we can temporarily store translated messages in redis to avoid translating message again if a message has been translated once. **Due to time constraint this has not been implemented but I also intended to use this for storing a common count or flag to know if the per minute limit of the provider has been reached and schedule the pending notifications for later accordingly.**
 - Originally, I intended to have separate worker process for listening to `email_queue`, `sms_queue` and `mobile_queue`. This does seem an overkill for the current scope but it should be preferred.
 - It should also be logged if a notification has been successfull sent. Moreover, this result should also be aggregated.
-- A common module is needed to share common functionality such as for enqueueing message in a **rabbitmq**.
+- A common module is needed to share common functionality such as for enqueueing message in a **rabbitmq**. This would also reduce a lot of code from `NotificationController` and **notifier.py**.
+- Notification Schema and user model should be separated from controllers.
+- Need to look at the connection restart mechansim incase `rabbitmq` or `mongodb` connection breaks in **notifier.py**.
 
 ## Technology Selection
 - **Mongo DB**: Relational databases are simpler but not expected to be used for such an open-ended scale. A NoSQL database seemed to be perfect for such a large scale.
