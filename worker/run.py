@@ -91,7 +91,6 @@ def get_id_filter_query(ids):
     objectIdList = []
     for i in ids:
         objectIdList.append(ObjectId(i))
-    print (objectIdList)
     return { "_id" : { "$in": objectIdList}}
 
 def get_group_filter_query(groups):

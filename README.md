@@ -128,6 +128,7 @@ language | string | Indicates the original language of the notification and valu
 - A common module is needed to share common functionality such as for enqueueing message in a **rabbitmq**. This would also reduce a lot of code from `NotificationController` and **notifier.py**.
 - Notification Schema and user model should be separated from controllers.
 - Need to look at the connection restart mechansim incase `rabbitmq` or `mongodb` connection breaks in **notifier.py**.
+- Separate the repository methods in a different file or folder
 
 ## Technology Selection
 - **MongoDB**: Relational databases are simpler but not expected to be used for such an open-ended scale. A NoSQL database seemed to be perfect for such a large scale.
