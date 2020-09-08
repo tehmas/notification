@@ -57,7 +57,7 @@ Status Code | Message | Meaning
 500 | language is required | "language" has not been sent in the post request body
 500 | Record already exists | A user with the same "email" already exists
 
-## User Retrieval
+### User Retrieval
 **Endpoint:** /user\
 **Query Parameter:** id - This is the id of the user\
 **Request Type:** GET\
@@ -75,7 +75,7 @@ Status Code | Message | Meaning
 }
 ```
 
-## User Deletion
+### User Deletion
 **Query Parameter:** id - This is the id of the user\
 **Request Type:** DELETE\
 **Sample URL:** `/user?id=5f572071242533f07f204185`
