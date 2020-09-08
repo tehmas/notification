@@ -1,13 +1,18 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from bson.objectid import ObjectId
+from bson.json_util import dumps
 from app import api, mongo
 from pymongo import errors
 
 class UserController(Resource):
     def get(self):
-        return str(mongo.db.user\
-            .find_one({'_id':ObjectId(request.args['id'])}))
+        user = mongo.db.user\
+            .find_one({'_id':ObjectId(request.args['id'])})
+        user["id"] = str(user["_id"])
+        del user["_id"]
+        print (user)
+        return user, 200
     
     def post(self):
         inputModel = request.get_json()
