@@ -12,8 +12,8 @@ Clone this repo and in command-prompt or terminal run:
 
 ### User Creation
 
-**Endpoint:** /user
-**Request Type:** POST
+**Endpoint:** /user\
+**Request Type:** POST\
 **Content-Type:** application/json
 
 Field | Type | Description | Required
@@ -54,7 +54,7 @@ Status Code | Message | Meaning
 500 | Record already exists | A user with the same "email" already exists
 
 ## User Retrieval
-**Endpoint:** /user
-**Query Parameter:** id - This is the id of the user
-**Request Type:** GET
+**Endpoint:** /user\
+**Query Parameter:** id - This is the id of the user\
+**Request Type:** GET\
 **Sample URL:** `/user?id=5f572071242533f07f204185`
