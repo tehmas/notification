@@ -12,6 +12,8 @@ Clone this repo and in command-prompt or terminal run:
 `Python 3.8` and `Pytest 6.0.1` is required for testing the `api`. After running the codebase using `docker-compose up`, open up a separate command-prompt or terminal with working directory set to the `test` folder, type and run:
 `pytest -v` 
 
+*NOTE: Mock-up data is required to run unit tests successfully*
+
 ![Test Cases Result](https://github.com/tehmas/notification/blob/master/images/test-cases-result.png)
 
 ## APIs
@@ -90,7 +92,6 @@ Status Code | Message | Meaning
 ```
 
 ### Send Notification
-
 **Endpoint:** /notification\
 **Request Type:** POST\
 **Content-Type:** application/json
@@ -104,7 +105,19 @@ groupFlag | string | Possible values are "Y" and "N". "Y" indicates the receiver
 receivers | array | If groupFlag is "N", contains the ids of the users. Whereas if groupFlag is "Y", contains the names of groups e.g "location:Pakistan" indicates a group of users who have their location set to "Pakistan". | Y
 language | string | Indicates the original language of the notification and value is according to the ISO 639-1 standard. | Y
 
-**Sample Request**:
+**Sample Request #1:**
+```json
+{
+    "title": "test 1",
+    "message": "Hope you are enjoying the app",
+    "providers": ["SMS", "Email", "Mobile"],
+    "groupFlag": "N",
+    "receivers": ["5f5762567da2869a56af47bc", "5f5763977da2869a56af47be"],
+    "language": "en-us"
+}
+```
+
+**Sample Request #2:**
 ```json
 {
     "title": "test 1",
@@ -116,7 +129,6 @@ language | string | Indicates the original language of the notification and valu
 }
 ```
 ## Process
-
 - **Send Notification** api is hit, the notification schema is validated and saved in database. 
 - The generated id of the notification is enqueued to a `notification_queue` **rabbitmq** queue and a success response is sent to the API consumer.
 - **notifier** is running and listening over the `notification_queue` in another process. Upon receiving a message (notification id), it first retrieves the complete notification from the database. It checks the `groupFlag` and retrieves data of the users accordingly. It prepares notification message for each user on the basis of the providers (Email, SMS, Mobile) and enqueus them to `email_queue`, `sms_queue` and `mobile_queue` accordingly. On each queue, a consumer is listening. Currently, only a message is printed by the email, sms and mobile notification senders to indicate that the notification has been sent after assuming that it has been translated to the preffered language. Fair prefetching has be adopted for each queue to result in optimized consumption if multiple worker processes are running.
@@ -128,7 +140,7 @@ language | string | Indicates the original language of the notification and valu
 - A common module is needed to share common functionality such as for enqueueing message in a **rabbitmq**. This would also reduce a lot of code from `NotificationController` and **notifier.py**.
 - Notification Schema and user model should be separated from controllers.
 - Need to look at the connection restart mechansim incase `rabbitmq` or `mongodb` connection breaks in **notifier.py**.
-- Separate the repository methods in a different file or folder
+- Separate the repository methods in a different file or folder.
 
 ## Technology Selection
 - **MongoDB**: Relational databases are simpler but not expected to be used for such an open-ended scale. A NoSQL database seemed to be perfect for such a large scale.
